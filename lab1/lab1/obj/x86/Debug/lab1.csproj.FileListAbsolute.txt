@@ -1,0 +1,8 @@
+F:\work\TMO\lab1\lab1\bin\Debug\lab1.exe
+F:\work\TMO\lab1\lab1\bin\Debug\lab1.pdb
+F:\work\TMO\lab1\lab1\obj\x86\Debug\lab1.csprojResolveAssemblyReference.cache
+F:\work\TMO\lab1\lab1\obj\x86\Debug\lab1.Form1.resources
+F:\work\TMO\lab1\lab1\obj\x86\Debug\lab1.Properties.Resources.resources
+F:\work\TMO\lab1\lab1\obj\x86\Debug\lab1.csproj.GenerateResource.Cache
+F:\work\TMO\lab1\lab1\obj\x86\Debug\lab1.exe
+F:\work\TMO\lab1\lab1\obj\x86\Debug\lab1.pdb
