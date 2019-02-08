@@ -39,5 +39,15 @@ namespace lab1
                 dataGridView3.Rows.Add();
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int Numb = dataGridView1.Rows.Count;
+            if(Numb<1)
+            {
+                return;
+            }
+            double[] Matrix = new double[Numb,Numb];
+        }
     }
 }
