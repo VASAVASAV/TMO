@@ -505,7 +505,7 @@ namespace lab3
                 double c = (par == 0) ? (Math.Sqrt(2)) : (1);
                 double quan = c / (12 * Math.Sqrt(N - 1));
                 double st = -1*Quantile.StudQuan(1-alfa/2, N);
-                textBox13.Text += "Коваріація = " + cov + ", довірчі інтервали - від " + Math.Round(covneeded - quan * st, (int)Accuracy) + "до" + Math.Round(covneeded + quan * st, (int)Accuracy) + Environment.NewLine;
+                textBox13.Text += "Коваріація = " + Math.Round(cov,(int)Accuracy) + ", довірчі інтервали - від " + Math.Round(covneeded - quan * st, (int)Accuracy) + " до " + Math.Round(covneeded + quan * st, (int)Accuracy) + Environment.NewLine;
 
             }
             if (radioButton1.Checked)

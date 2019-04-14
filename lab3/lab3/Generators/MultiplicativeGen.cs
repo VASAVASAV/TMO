@@ -8,21 +8,21 @@ namespace lab3
 {
     class MultiplicativeGen : IRandomGenerator
     {
-        private double key;
+        private uint key;
 
-        private double m;
-        private double d;
+        private uint m;
+        private uint d;
 
         public MultiplicativeGen()
         {
-            m = 630360016;
+            m = 764261123;
             d = 2147483647;
             key = 1;
         }
 
         double IRandomGenerator.GetNext()
         {
-            key = (key * m) % d;
+            key = (key * m + 1) % d;
             return ((double)key)/d;
         }
 
