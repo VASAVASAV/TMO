@@ -1,0 +1,9 @@
+F:\work\TMO\TMOCurse\TMOCurse\bin\Debug\TMOCurse.exe.config
+F:\work\TMO\TMOCurse\TMOCurse\bin\Debug\TMOCurse.exe
+F:\work\TMO\TMOCurse\TMOCurse\bin\Debug\TMOCurse.pdb
+F:\work\TMO\TMOCurse\TMOCurse\obj\Debug\TMOCurse.csprojAssemblyReference.cache
+F:\work\TMO\TMOCurse\TMOCurse\obj\Debug\TMOCurse.MyProg.resources
+F:\work\TMO\TMOCurse\TMOCurse\obj\Debug\TMOCurse.csproj.GenerateResource.cache
+F:\work\TMO\TMOCurse\TMOCurse\obj\Debug\TMOCurse.csproj.CoreCompileInputs.cache
+F:\work\TMO\TMOCurse\TMOCurse\obj\Debug\TMOCurse.exe
+F:\work\TMO\TMOCurse\TMOCurse\obj\Debug\TMOCurse.pdb

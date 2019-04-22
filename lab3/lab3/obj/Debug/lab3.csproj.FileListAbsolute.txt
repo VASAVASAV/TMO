@@ -1,0 +1,9 @@
+F:\work\TMO\lab3\lab3\bin\Debug\lab3.exe.config
+F:\work\TMO\lab3\lab3\bin\Debug\lab3.exe
+F:\work\TMO\lab3\lab3\bin\Debug\lab3.pdb
+F:\work\TMO\lab3\lab3\obj\Debug\lab3.csprojAssemblyReference.cache
+F:\work\TMO\lab3\lab3\obj\Debug\lab3.MyProg.resources
+F:\work\TMO\lab3\lab3\obj\Debug\lab3.csproj.GenerateResource.cache
+F:\work\TMO\lab3\lab3\obj\Debug\lab3.csproj.CoreCompileInputs.cache
+F:\work\TMO\lab3\lab3\obj\Debug\lab3.exe
+F:\work\TMO\lab3\lab3\obj\Debug\lab3.pdb

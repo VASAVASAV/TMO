@@ -22,6 +22,8 @@ namespace TMOCurse
         private TextBox textBox4;
         private TextBox textBox5;
         private Label label5;
+        private TextBox textBox6;
+        private Label label6;
         private TextBox textBox1;
 
         public MyProg()
@@ -56,6 +58,8 @@ namespace TMOCurse
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.LogOutputTextBox = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -131,6 +135,8 @@ namespace TMOCurse
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.textBox6);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.textBox5);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
@@ -143,7 +149,7 @@ namespace TMOCurse
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(346, 164);
+            this.groupBox1.Size = new System.Drawing.Size(346, 199);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Загальні характеристики";
@@ -247,6 +253,22 @@ namespace TMOCurse
             this.LogOutputTextBox.Name = "LogOutputTextBox";
             this.LogOutputTextBox.Size = new System.Drawing.Size(340, 105);
             this.LogOutputTextBox.TabIndex = 6;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(265, 149);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(75, 20);
+            this.textBox6.TabIndex = 11;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(5, 152);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(119, 13);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Маштабування імітації";
             // 
             // MyProg
             // 
@@ -425,10 +447,21 @@ namespace TMOCurse
             chart1.Series[7].Points.AddXY(0, 0);
             chart1.Series[8].Points.AddXY(0, 0);
 
+            double Multiplyier = 1;
+            try
+            {
+                Multiplyier = Convert.ToDouble(textBox6.Text);
+            }
+            catch
+
+            {
+                Multiplyier = 1;
+            }
+
             double tau1, tau2;
             double AllTime;
 
-            while (TimePassed < T)
+            while (TimePassed < T*Multiplyier)
             {
                 switch (CurrentPoint)
                 {
@@ -465,9 +498,9 @@ namespace TMOCurse
                 AllTime = TimeInFirst + TimeInSecond + TimeInThird;
                 TimePassed = AllTime;
                 CurrentPoint = NextPoint;
-                chart1.Series[6].Points.AddXY(AllTime, TimeInFirst / AllTime);
-                chart1.Series[7].Points.AddXY(AllTime, TimeInSecond / AllTime);
-                chart1.Series[8].Points.AddXY(AllTime, TimeInThird / AllTime);
+                chart1.Series[6].Points.AddXY(AllTime / Multiplyier, TimeInFirst / AllTime);
+                chart1.Series[7].Points.AddXY(AllTime / Multiplyier, TimeInSecond / AllTime);
+                chart1.Series[8].Points.AddXY(AllTime / Multiplyier, TimeInThird / AllTime);
             }
             
         }
