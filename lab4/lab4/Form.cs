@@ -55,22 +55,22 @@ namespace lab4
             this.label4 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.LogOutput = new System.Windows.Forms.GroupBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
-            this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.LogOutput.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
+            this.LogOutput.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -154,7 +154,7 @@ namespace lab4
             this.tabControl1.Location = new System.Drawing.Point(15, 115);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(746, 422);
+            this.tabControl1.Size = new System.Drawing.Size(815, 498);
             this.tabControl1.TabIndex = 9;
             // 
             // tabPage1
@@ -163,10 +163,26 @@ namespace lab4
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(738, 396);
+            this.tabPage1.Size = new System.Drawing.Size(807, 472);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // chart1
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(7, 7);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(790, 450);
+            this.chart1.TabIndex = 0;
+            this.chart1.Text = "chart1";
             // 
             // tabPage2
             // 
@@ -174,17 +190,33 @@ namespace lab4
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(738, 396);
+            this.tabPage2.Size = new System.Drawing.Size(807, 472);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // chart2
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart2.Legends.Add(legend2);
+            this.chart2.Location = new System.Drawing.Point(6, 3);
+            this.chart2.Name = "chart2";
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart2.Series.Add(series2);
+            this.chart2.Size = new System.Drawing.Size(607, 463);
+            this.chart2.TabIndex = 1;
+            this.chart2.Text = "chart2";
+            // 
             // LogOutput
             // 
             this.LogOutput.Controls.Add(this.textBox5);
-            this.LogOutput.Location = new System.Drawing.Point(767, 115);
+            this.LogOutput.Location = new System.Drawing.Point(840, 115);
             this.LogOutput.Name = "LogOutput";
-            this.LogOutput.Size = new System.Drawing.Size(207, 219);
+            this.LogOutput.Size = new System.Drawing.Size(244, 228);
             this.LogOutput.TabIndex = 10;
             this.LogOutput.TabStop = false;
             this.LogOutput.Text = "Журнал";
@@ -194,7 +226,7 @@ namespace lab4
             this.textBox5.Location = new System.Drawing.Point(6, 19);
             this.textBox5.Multiline = true;
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(195, 190);
+            this.textBox5.Size = new System.Drawing.Size(232, 203);
             this.textBox5.TabIndex = 11;
             // 
             // radioButton1
@@ -219,22 +251,6 @@ namespace lab4
             this.radioButton2.Text = "Стек";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
-            // chart1
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(7, 7);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(725, 383);
-            this.chart1.TabIndex = 0;
-            this.chart1.Text = "chart1";
-            // 
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
@@ -258,30 +274,14 @@ namespace lab4
             // checkedListBox1
             // 
             this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(773, 341);
+            this.checkedListBox1.Location = new System.Drawing.Point(840, 349);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(195, 199);
+            this.checkedListBox1.Size = new System.Drawing.Size(244, 259);
             this.checkedListBox1.TabIndex = 14;
-            // 
-            // chart2
-            // 
-            chartArea2.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart2.Legends.Add(legend2);
-            this.chart2.Location = new System.Drawing.Point(6, 3);
-            this.chart2.Name = "chart2";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart2.Series.Add(series2);
-            this.chart2.Size = new System.Drawing.Size(574, 383);
-            this.chart2.TabIndex = 1;
-            this.chart2.Text = "chart2";
             // 
             // MyProg
             // 
-            this.ClientSize = new System.Drawing.Size(986, 549);
+            this.ClientSize = new System.Drawing.Size(1096, 617);
             this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.radioButton4);
             this.Controls.Add(this.radioButton3);
@@ -301,11 +301,11 @@ namespace lab4
             this.Name = "MyProg";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.LogOutput.ResumeLayout(false);
             this.LogOutput.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -337,9 +337,28 @@ namespace lab4
                 LogOutput.Text += "Wrong input" + Environment.NewLine;
                 return;
             }
-            double CurrentT;
+            double CurrentT = 0;
+            List<double> Queue = new List<double>();
+
+            double DownTime = 0;
+
+            List<double> TimeInNode = new List<double>();
+            for (int i = 0; i < QueueLength + 1; i++)
+            {
+                TimeInNode.Add(0);
+            }
+
+            List<Need> NewNeeds = new List<Need>();
 
 
+            while (CurrentT < TimeOfWork)
+            {
+                if (Queue.Count == 0)
+                {
+                    
+                }
+            }
+                
         }
     }
 }
