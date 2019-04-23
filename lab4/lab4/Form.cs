@@ -22,10 +22,28 @@ namespace lab4
         private TabPage tabPage2;
         private GroupBox LogOutput;
         private TextBox textBox5;
+        private RadioButton radioButton1;
+        private RadioButton radioButton2;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
+        private RadioButton radioButton3;
+        private RadioButton radioButton4;
+        private CheckedListBox checkedListBox1;
         private Label label4;
+
+        public MyProg()
+        {
+            InitializeComponent();
+        }
 
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -40,15 +58,26 @@ namespace lab4
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.LogOutput = new System.Windows.Forms.GroupBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.LogOutput.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(321, 69);
+            this.button1.Location = new System.Drawing.Point(300, 70);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(186, 39);
+            this.button1.Size = new System.Drawing.Size(196, 39);
             this.button1.TabIndex = 0;
             this.button1.Text = "Моделювати";
             this.button1.UseVisualStyleBackColor = true;
@@ -125,25 +154,27 @@ namespace lab4
             this.tabControl1.Location = new System.Drawing.Point(15, 115);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(710, 394);
+            this.tabControl1.Size = new System.Drawing.Size(746, 422);
             this.tabControl1.TabIndex = 9;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.chart1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(702, 368);
+            this.tabPage1.Size = new System.Drawing.Size(738, 396);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.chart2);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(192, 74);
+            this.tabPage2.Size = new System.Drawing.Size(738, 396);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -151,9 +182,9 @@ namespace lab4
             // LogOutput
             // 
             this.LogOutput.Controls.Add(this.textBox5);
-            this.LogOutput.Location = new System.Drawing.Point(731, 115);
+            this.LogOutput.Location = new System.Drawing.Point(767, 115);
             this.LogOutput.Name = "LogOutput";
-            this.LogOutput.Size = new System.Drawing.Size(197, 394);
+            this.LogOutput.Size = new System.Drawing.Size(207, 219);
             this.LogOutput.TabIndex = 10;
             this.LogOutput.TabStop = false;
             this.LogOutput.Text = "Журнал";
@@ -163,12 +194,99 @@ namespace lab4
             this.textBox5.Location = new System.Drawing.Point(6, 19);
             this.textBox5.Multiline = true;
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(185, 369);
+            this.textBox5.Size = new System.Drawing.Size(195, 190);
             this.textBox5.TabIndex = 11;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(767, 16);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(56, 17);
+            this.radioButton1.TabIndex = 11;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Черга";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(767, 42);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(49, 17);
+            this.radioButton2.TabIndex = 12;
+            this.radioButton2.Text = "Стек";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // chart1
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(7, 7);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(725, 383);
+            this.chart1.TabIndex = 0;
+            this.chart1.Text = "chart1";
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(840, 42);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(72, 17);
+            this.radioButton3.TabIndex = 12;
+            this.radioButton3.Text = "Варіант 2";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(840, 18);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(72, 17);
+            this.radioButton4.TabIndex = 13;
+            this.radioButton4.Text = "Варіант 1";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Location = new System.Drawing.Point(773, 341);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(195, 199);
+            this.checkedListBox1.TabIndex = 14;
+            // 
+            // chart2
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart2.Legends.Add(legend2);
+            this.chart2.Location = new System.Drawing.Point(6, 3);
+            this.chart2.Name = "chart2";
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart2.Series.Add(series2);
+            this.chart2.Size = new System.Drawing.Size(574, 383);
+            this.chart2.TabIndex = 1;
+            this.chart2.Text = "chart2";
             // 
             // MyProg
             // 
-            this.ClientSize = new System.Drawing.Size(940, 521);
+            this.ClientSize = new System.Drawing.Size(986, 549);
+            this.Controls.Add(this.checkedListBox1);
+            this.Controls.Add(this.radioButton4);
+            this.Controls.Add(this.radioButton3);
+            this.Controls.Add(this.radioButton2);
+            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.LogOutput);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.textBox4);
@@ -182,8 +300,12 @@ namespace lab4
             this.Controls.Add(this.button1);
             this.Name = "MyProg";
             this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.LogOutput.ResumeLayout(false);
             this.LogOutput.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
