@@ -58,11 +58,27 @@ namespace TMOCurse
         private TextBox textBox13;
         private TextBox textBox14;
         private Label label14;
+        private TabControl tabControl2;
+        private TabPage tabPage4;
+        private TabPage tabPage5;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
+        private RadioButton radioButton3;
+        private RadioButton radioButton2;
+        private RadioButton radioButton1;
         private TextBox textBox1;
 
         public MyProg()
         {
             InitializeComponent();
+            chart1.ChartAreas[0].CursorX.IsUserEnabled = true;
+            chart1.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
+            chart1.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+            chart1.ChartAreas[0].AxisX.ScrollBar.IsPositionedInside = true;
+            chart1.ChartAreas[0].CursorY.IsUserEnabled = true;
+            chart1.ChartAreas[0].CursorY.IsUserSelectionEnabled = true;
+            chart1.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
+            chart1.ChartAreas[0].AxisY.ScrollBar.IsPositionedInside = true;
+            chart1.ChartAreas[0].CursorY.Interval = 0.005D;
         }
 
         private void InitializeComponent()
@@ -81,6 +97,9 @@ namespace TMOCurse
             System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series13 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label10 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -131,6 +150,13 @@ namespace TMOCurse
             this.textBox13 = new System.Windows.Forms.TextBox();
             this.textBox14 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -139,15 +165,24 @@ namespace TMOCurse
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabControl2.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.SuspendLayout();
             // 
             // chart1
             // 
+            chartArea1.AxisX.Minimum = 0D;
+            chartArea1.AxisY.Maximum = 1D;
+            chartArea1.AxisY.Minimum = 0D;
+            chartArea1.AxisY2.Maximum = 1D;
+            chartArea1.AxisY2.Minimum = 0D;
             chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(357, 12);
+            this.chart1.Location = new System.Drawing.Point(6, 6);
             this.chart1.Name = "chart1";
             series1.BorderWidth = 4;
             series1.ChartArea = "ChartArea1";
@@ -221,7 +256,7 @@ namespace TMOCurse
             this.chart1.Series.Add(series10);
             this.chart1.Series.Add(series11);
             this.chart1.Series.Add(series12);
-            this.chart1.Size = new System.Drawing.Size(977, 656);
+            this.chart1.Size = new System.Drawing.Size(965, 618);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
@@ -386,10 +421,10 @@ namespace TMOCurse
             // 
             // LogOutputTextBox
             // 
-            this.LogOutputTextBox.Location = new System.Drawing.Point(13, 428);
+            this.LogOutputTextBox.Location = new System.Drawing.Point(13, 299);
             this.LogOutputTextBox.Multiline = true;
             this.LogOutputTextBox.Name = "LogOutputTextBox";
-            this.LogOutputTextBox.Size = new System.Drawing.Size(340, 175);
+            this.LogOutputTextBox.Size = new System.Drawing.Size(340, 304);
             this.LogOutputTextBox.TabIndex = 6;
             // 
             // groupBox2
@@ -728,13 +763,98 @@ namespace TMOCurse
             this.label14.TabIndex = 24;
             this.label14.Text = "Час, проведений у стані p1";
             // 
+            // tabControl2
+            // 
+            this.tabControl2.Controls.Add(this.tabPage4);
+            this.tabControl2.Controls.Add(this.tabPage5);
+            this.tabControl2.Location = new System.Drawing.Point(357, 13);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(985, 656);
+            this.tabControl2.TabIndex = 11;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.chart1);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(977, 630);
+            this.tabPage4.TabIndex = 0;
+            this.tabPage4.Text = "Загальні ймовірності";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.chart2);
+            this.tabPage5.Controls.Add(this.radioButton3);
+            this.tabPage5.Controls.Add(this.radioButton2);
+            this.tabPage5.Controls.Add(this.radioButton1);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(977, 630);
+            this.tabPage5.TabIndex = 1;
+            this.tabPage5.Text = "Похибка моделяції";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // chart2
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart2.Legends.Add(legend2);
+            this.chart2.Location = new System.Drawing.Point(7, 42);
+            this.chart2.Name = "chart2";
+            series13.ChartArea = "ChartArea1";
+            series13.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series13.Legend = "Legend1";
+            series13.Name = "Series1";
+            this.chart2.Series.Add(series13);
+            this.chart2.Size = new System.Drawing.Size(964, 582);
+            this.chart2.TabIndex = 3;
+            this.chart2.Text = "chart2";
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(211, 11);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(37, 17);
+            this.radioButton3.TabIndex = 2;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "p2";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(108, 11);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(37, 17);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "p1";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(7, 11);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(37, 17);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "p0";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
             // MyProg
             // 
             this.ClientSize = new System.Drawing.Size(1354, 681);
+            this.Controls.Add(this.tabControl2);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.LogOutputTextBox);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.chart1);
             this.Name = "MyProg";
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.groupBox2.ResumeLayout(false);
@@ -749,6 +869,11 @@ namespace TMOCurse
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.tabControl2.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -769,6 +894,7 @@ namespace TMOCurse
             chart1.Series[9].Points.Clear();
             chart1.Series[10].Points.Clear();
             chart1.Series[11].Points.Clear();
+            chart2.Series[0].Points.Clear();
             double T, l, m;
             try
             {
@@ -1077,10 +1203,23 @@ namespace TMOCurse
                     chart1.Series[7].Points.AddXY(AllTime / Multiplyier, TimeInSecond / AllTime);
                 if (checkBox10.Checked)
                     chart1.Series[8].Points.AddXY(AllTime / Multiplyier, TimeInThird / AllTime);
+                if (radioButton1.Checked)
+                {
+                    chart2.Series[0].Points.AddXY(AllTime / Multiplyier, Math.Abs(TimeInFirst / AllTime-p0(AllTime / Multiplyier)));
+                }
+                if (radioButton2.Checked)
+                {
+                    chart2.Series[0].Points.AddXY(AllTime / Multiplyier, Math.Abs(TimeInSecond / AllTime - p1(AllTime / Multiplyier)));
+                }
+                if (radioButton3.Checked)
+                {
+                    chart2.Series[0].Points.AddXY(AllTime / Multiplyier, Math.Abs(TimeInThird / AllTime - p2(AllTime / Multiplyier)));
+                }
             }
             textBox12.Text = "" + Math.Round(TimeInFirst,AccNums);
             textBox13.Text = "" + Math.Round(TimeInSecond,AccNums);
             textBox14.Text = "" + Math.Round(TimeInThird,AccNums);
+            LogOutputTextBox.Text += "Похибки імітаційного моделювання: p0 - " + Math.Round(Math.Abs(TimeInFirst / (TimePassed) - p0(time)),AccNums) + ", p1 - " + Math.Round(Math.Abs(TimeInSecond / (TimePassed) - p1(time)), AccNums) + ", p2 - " + Math.Round(Math.Abs(TimeInThird / (TimePassed) - p2(time)), AccNums) + Environment.NewLine;
         }
     }
 }
