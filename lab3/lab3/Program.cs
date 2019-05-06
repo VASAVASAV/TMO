@@ -18,4 +18,4 @@ namespace lab3
             Application.Run(Prog);
         }
     }
-}
+} 

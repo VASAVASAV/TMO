@@ -421,6 +421,10 @@ namespace lab3
             double sigm = 0;
             int N = 10000;
             double[] Vals = new double[N];
+            if (CurrentGen == null)
+            {
+                return;
+            }
             for (int i = 0; i < N; i++)
             {
                 Vals[i] = CurrentGen.GetNext();
