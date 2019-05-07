@@ -55,6 +55,8 @@ namespace lab4
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private TabPage tabPage6;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart4;
         int Accuracy = 5;
 
         public MyProg()
@@ -84,6 +86,10 @@ namespace lab4
             System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -130,6 +136,8 @@ namespace lab4
             this.label6 = new System.Windows.Forms.Label();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.chart4 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -145,6 +153,8 @@ namespace lab4
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.tabPage6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart4)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -233,6 +243,7 @@ namespace lab4
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Location = new System.Drawing.Point(15, 115);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -330,7 +341,7 @@ namespace lab4
             series5.Name = "Середній час очікування у черзі";
             this.chart3.Series.Add(series4);
             this.chart3.Series.Add(series5);
-            this.chart3.Size = new System.Drawing.Size(607, 463);
+            this.chart3.Size = new System.Drawing.Size(801, 463);
             this.chart3.TabIndex = 2;
             this.chart3.Text = "chart3";
             // 
@@ -617,6 +628,38 @@ namespace lab4
             this.label7.TabIndex = 25;
             this.label7.Text = "Точність";
             // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.chart4);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Size = new System.Drawing.Size(807, 472);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "Ще більше графіків";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // chart4
+            // 
+            chartArea4.Name = "ChartArea1";
+            this.chart4.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chart4.Legends.Add(legend4);
+            this.chart4.Location = new System.Drawing.Point(7, 3);
+            this.chart4.Name = "chart4";
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series6.Legend = "Legend1";
+            series6.Name = "Довжина черги";
+            series7.ChartArea = "ChartArea1";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series7.Legend = "Legend1";
+            series7.Name = "Середня довжина черги";
+            this.chart4.Series.Add(series6);
+            this.chart4.Series.Add(series7);
+            this.chart4.Size = new System.Drawing.Size(797, 463);
+            this.chart4.TabIndex = 3;
+            this.chart4.Text = "chart4";
+            // 
             // MyProg
             // 
             this.ClientSize = new System.Drawing.Size(1130, 652);
@@ -661,6 +704,8 @@ namespace lab4
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.tabPage6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -757,6 +802,8 @@ namespace lab4
             chart2.Series[2].Points.Clear();
             chart3.Series[0].Points.Clear();
             chart3.Series[1].Points.Clear();
+            chart4.Series[0].Points.Clear();
+            chart4.Series[1].Points.Clear();
             for (i = 0; i < QueueLength + 2; i++)
             {
                 var Tempser = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -776,9 +823,7 @@ namespace lab4
                 Need Current = null;
                 while (CurrentT < TimeOfWork)
                 {
-                    Iterations++;
-                    TempSum1 = ((TempSum1 * (Iterations - 1)) + ((CurrentState > 1) ? (CurrentState - 1) : (0))) / Iterations;
-                    TempSum2 += (CurrentState > 0) ? (CurrentState) : (0);
+                    
                     tau1 = Generator.NextRand(Param1);
                     if (CurrentState == 0)
                     {
@@ -797,6 +842,11 @@ namespace lab4
                     {
                         if (tau1 < tau2)//new need
                         {
+                            Iterations++;
+                            TempSum1 = ((TempSum1 * (Iterations - 1)) + ((CurrentState > 1) ? (CurrentState - 1) : (0))) / Iterations;
+                            TempSum2 += (CurrentState > 0) ? (CurrentState) : (0);
+                            chart4.Series[0].Points.AddXY(CurrentT, ((CurrentState > 1) ? (CurrentState - 1) : (0)));
+                            chart4.Series[1].Points.AddXY(CurrentT, TempSum1);
                             AllIncome++;
                             if (CurrentState == QueueLength + 1)
                             {
@@ -884,7 +934,7 @@ namespace lab4
 
             dataGridView1.Rows[1].Cells[1].Value =  1 - Math.Round(p0 *  Math.Pow(ro, QueueLength + 1), Accuracy);
             dataGridView1.Rows[1].Cells[2].Value =  1 - Math.Round(TimeInNode[QueueLength + 1] / TimeOfWork, Accuracy);
-            dataGridView1.Rows[1].Cells[3].Value = (Done.Count / TimeOfWork)/lambda;
+            dataGridView1.Rows[1].Cells[3].Value = Math.Round(((Done.Count / TimeOfWork)/lambda>1)?(1):((Done.Count / TimeOfWork) / lambda),Accuracy);
 
             dataGridView1.Rows[2].Cells[1].Value = lambda*(1 - Math.Round(p0 * Math.Pow(ro, QueueLength + 1), Accuracy));
             dataGridView1.Rows[2].Cells[2].Value = lambda*(1 - Math.Round(TimeInNode[QueueLength + 1] / TimeOfWork, Accuracy));
@@ -915,14 +965,23 @@ namespace lab4
             dataGridView1.Rows[5].Cells[2].Value = Math.Round((double)TempSum2 / Iterations, Accuracy);
             dataGridView1.Rows[5].Cells[3].Value = Math.Round(temp, Accuracy);
 
+            Done.AddRange(Queue);
+            temp = Done.Select(el => el.WorkStartTime - el.IncomeTime).Average();
+            temp = ((1 - (QueueLength + 1) * Math.Pow(ro, QueueLength) + QueueLength * Math.Pow(ro, QueueLength+1)) / Math.Pow(1-ro,2));
+
             dataGridView1.Rows[6].Cells[1].Value = Math.Round(((ro * ro * (1 - Math.Pow(ro, QueueLength) * (QueueLength + 1 - QueueLength * ro))) / ((1 - Math.Pow(ro, QueueLength + 2)) * (1 - ro)))/lambda, Accuracy);
-            dataGridView1.Rows[6].Cells[3].Value = Math.Round(AverageWait, Accuracy);
-            
+            //Rows[6].Cells[2].Value = Math.Round(((ro*p0)/(mi))*temp, Accuracy);
+            //dataGridView1.Rows[6].Cells[3].Value = Math.Round(AverageWait, Accuracy);
+
+            //temp = Done.Select(el => el.WorkEndTime - el.WorkStartTime).Average();
+
             dataGridView1.Rows[7].Cells[1].Value = Math.Round(1d/mi, Accuracy);
+           // dataGridView1.Rows[7].Cells[2].Value = Math.Round(temp, Accuracy);
             dataGridView1.Rows[7].Cells[3].Value = Math.Round(AverageWork, Accuracy);
 
-            dataGridView1.Rows[8].Cells[1].Value = Math.Round(((ro * ro * (1 - Math.Pow(ro, QueueLength) * (QueueLength + 1 - QueueLength * ro))) / ((1 - Math.Pow(ro, QueueLength + 2)) * (1 - ro))) / lambda, Accuracy) - Math.Round(1 - Math.Round(p0 * Math.Pow(ro, QueueLength + 1), Accuracy) / mi, Accuracy);
-            dataGridView1.Rows[8].Cells[3].Value = Math.Round(AverageWait+AverageWork, Accuracy);
+            dataGridView1.Rows[8].Cells[1].Value = Math.Round(Math.Round(((ro * ro * (1 - Math.Pow(ro, QueueLength) * (QueueLength + 1 - QueueLength * ro))) / ((1 - Math.Pow(ro, QueueLength + 2)) * (1 - ro))) / lambda, Accuracy) + (1 - Math.Round(p0 * Math.Pow(ro, QueueLength + 1), Accuracy)) /mi, Accuracy);
+            //dataGridView1.Rows[8].Cells[2].Value = Math.Round(1d / (mi*(1-ro)), Accuracy);
+            //dataGridView1.Rows[8].Cells[3].Value = Math.Round(AverageWait+AverageWork, Accuracy);
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
