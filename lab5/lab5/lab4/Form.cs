@@ -57,8 +57,6 @@ namespace lab4
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private TabPage tabPage6;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart4;
-        private TextBox textBox9;
-        private Label label8;
         int Accuracy = 5;
 
         public MyProg()
@@ -140,8 +138,6 @@ namespace lab4
             this.label6 = new System.Windows.Forms.Label();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -664,28 +660,9 @@ namespace lab4
             this.label7.TabIndex = 25;
             this.label7.Text = "Точність";
             // 
-            // textBox9
-            // 
-            this.textBox9.Location = new System.Drawing.Point(541, 74);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(100, 20);
-            this.textBox9.TabIndex = 28;
-            this.textBox9.Text = "2";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(442, 77);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(93, 13);
-            this.label8.TabIndex = 27;
-            this.label8.Text = "кількість каналів";
-            // 
             // MyProg
             // 
             this.ClientSize = new System.Drawing.Size(1130, 652);
-            this.Controls.Add(this.textBox9);
-            this.Controls.Add(this.label8);
             this.Controls.Add(this.textBox8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.textBox6);
@@ -708,6 +685,7 @@ namespace lab4
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Name = "MyProg";
+            this.Text = " ";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
@@ -742,7 +720,6 @@ namespace lab4
             double mi;
             double TimeOfWork;
             int QueueLength;
-            int NumberOfChannels;
             try
             {
                 lambda = Convert.ToDouble(textBox1.Text);
@@ -753,8 +730,7 @@ namespace lab4
                 }
                 TimeOfWork = Convert.ToDouble(textBox4.Text);
                 QueueLength = Convert.ToInt32(textBox3.Text);
-                NumberOfChannels = Convert.ToInt32(textBox9.Text);
-                if (TimeOfWork <= 0 || QueueLength < 0 || NumberOfChannels<=0)
+                if (TimeOfWork <= 0 || QueueLength < 0)
                 {
                     throw new Exception();
                 }
@@ -769,7 +745,7 @@ namespace lab4
             List<Need> Done = new List<Need>();
 
             List<double> TimeInNode = new List<double>();
-            for (i = 0; i < QueueLength + NumberOfChannels + 1; i++)
+            for (i = 0; i < QueueLength + 2; i++)
             {
                 TimeInNode.Add(0);
             }
@@ -829,7 +805,7 @@ namespace lab4
             chart3.Series[1].Points.Clear();
             chart4.Series[0].Points.Clear();
             chart4.Series[1].Points.Clear();
-            for (i = 0; i < QueueLength + NumberOfChannels+1; i++)
+            for (i = 0; i < QueueLength + 2; i++)
             {
                 var Tempser = new System.Windows.Forms.DataVisualization.Charting.Series();
                 Tempser.ChartArea = "ChartArea1";
@@ -842,8 +818,6 @@ namespace lab4
             int Iterations = 0;
             double TempSum1 = 0;
             double TempSum2 = 0;
-
-            DateTime lol = DateTime.Now;
             if (radioButton3.Checked)
             {
                 int CurrentState = 0;
@@ -858,10 +832,6 @@ namespace lab4
                     }
                     else
                     {
-                        if (radioButton5.Checked)
-                        {
-                            Param2[0] = mi * ((CurrentState <= NumberOfChannels) ? (CurrentState) : (NumberOfChannels));
-                        }
                         tau2 = Generator.NextRand(Param2);
                     }
                     if (CurrentT + ((tau1 < tau2) ? (tau1) : (tau2)) > TimeOfWork)
@@ -1057,7 +1027,6 @@ namespace lab4
                 }
                 /////////
             }
-            textBox5.Text += "Час роботи - " + (double)(DateTime.Now - lol).Milliseconds / 1000 + " сек " + Environment.NewLine;
             double ro = lambda / mi;
             double p0 = 1;
             for (i = 1; i < QueueLength + 2; i++)
