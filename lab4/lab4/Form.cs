@@ -847,7 +847,7 @@ namespace lab4
             if (radioButton3.Checked)
             {
                 int CurrentState = 0;
-                Need Current = null;
+                List<Need> Current = new List<Need>();
                 while (CurrentT < TimeOfWork)
                 {
                     
@@ -874,12 +874,12 @@ namespace lab4
                         if (tau1 < tau2)//new need
                         {
                             Iterations++;
-                            TempSum1 = ((TempSum1 * (Iterations - 1)) + ((CurrentState > 1) ? (CurrentState - 1) : (0))) / Iterations;
+                            TempSum1 = ((TempSum1 * (Iterations - 1)) + ((CurrentState > NumberOfChannels) ? (CurrentState - NumberOfChannels) : (0))) / Iterations;
                             TempSum2 += (CurrentState > 0) ? (CurrentState) : (0);
                             chart4.Series[0].Points.AddXY(CurrentT, ((CurrentState > 1) ? (CurrentState - 1) : (0)));
                             chart4.Series[1].Points.AddXY(CurrentT, TempSum1);
                             AllIncome++;
-                            if (CurrentState == QueueLength + 1)
+                            if (CurrentState == QueueLength + NumberOfChannels)
                             {
                                 NumberOfDenies++;
                                 TimeInNode[CurrentState] += tau1;
