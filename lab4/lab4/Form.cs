@@ -878,7 +878,7 @@ namespace lab4
                             TempSum1 = ((TempSum1 * (Iterations - 1)) + ((CurrentState > NumberOfChannels) ? (CurrentState - NumberOfChannels) : (0))) / Iterations;
                             TempSum2 += (CurrentState > 0) ? (CurrentState) : (0);
                             chart4.Series[0].Points.AddXY(CurrentT, ((CurrentState > 1) ? (CurrentState - 1) : (0)));
-                            chart4.Series[1].Points.AddXY(CurrentT, TempSum1);
+                            //chart4.Series[1].Points.AddXY(CurrentT, TempSum1);
                             AllIncome++;
                             if (CurrentState == QueueLength + NumberOfChannels)
                             {
@@ -904,12 +904,17 @@ namespace lab4
                         else//need processed
                         {
                             Current[0].WorkEndTime = CurrentT + tau2;
+                            if (tau2 > 25)
+                            {
+                                Console.WriteLine();
+                            }
                             Done.Add(Current[0]);
                             AverageWait = (AverageWait * (Done.Count - 1) + Done[Done.Count - 1].WorkStartTime - Done[Done.Count - 1].IncomeTime) / Done.Count;
                             AverageWork = (AverageWork * (Done.Count - 1) + Done[Done.Count - 1].WorkEndTime - Done[Done.Count - 1].WorkStartTime) / Done.Count;
+                            Current.RemoveAt(0);
                             if (CurrentState == 1)
                             {
-                                Current.RemoveAt(0);
+                                
                             }
                             else
                             {
@@ -939,7 +944,7 @@ namespace lab4
                         chart2.Series[0].Points.AddXY(CurrentT,Done.Count);
                         chart2.Series[1].Points.AddXY(CurrentT, NumberOfDenies);
                         chart2.Series[2].Points.AddXY(CurrentT, AllIncome);
-                        chart3.Series[0].Points.AddXY(CurrentT, AverageWork/CurrentT);
+                       // chart3.Series[0].Points.AddXY(CurrentT, AverageWork/CurrentT);
                         chart3.Series[1].Points.AddXY(CurrentT, AverageWait);
                     }
                 }
@@ -947,7 +952,7 @@ namespace lab4
             else
             {
                 int CurrentState = 0;
-                Need Current = null;
+                List<Need> Current = new List<Need>(); 
                 Need New = null;
                 while (CurrentT < TimeOfWork)
                 {
@@ -966,41 +971,39 @@ namespace lab4
                         }
                         tau1 = Generator.NextRand(Param1);
                         New = new Need(CurrentT + tau1);
-                        Current = new Need(CurrentT);
-                        Current.WorkStartTime = Current.IncomeTime;
+                        Current.Add( new Need(CurrentT));
+                        Current[0].WorkStartTime = Current[0].IncomeTime;
                         tau2 = Generator.NextRand(Param2);
-                        Current.WorkEndTime = CurrentT + tau2;
+                        Current[0].WorkEndTime = CurrentT + tau2;
                         Iterations++;
-                        TempSum1 = ((TempSum1 * (Iterations - 1)) + ((CurrentState > 1) ? (CurrentState - 1) : (0))) / Iterations;
+                        TempSum1 = ((TempSum1 * (Iterations - 1)) + ((CurrentState > NumberOfChannels) ? (CurrentState - NumberOfChannels) : (0))) / Iterations;
                         TempSum2 += (CurrentState > 0) ? (CurrentState) : (0);
                         chart4.Series[0].Points.AddXY(CurrentT, ((CurrentState > 1) ? (CurrentState - 1) : (0)));
-                        chart4.Series[1].Points.AddXY(CurrentT, TempSum1);
+                       // chart4.Series[1].Points.AddXY(CurrentT, TempSum1);
                         CurrentState++;
                     }
                     else
                     {
-                        if (CurrentT >= Current.WorkEndTime)
+                        if (CurrentT >= Current.Min(el => el.WorkEndTime))
                         {
-                            Done.Add(Current);
-                            if (CurrentState == 1)
-                            {
-                                Current = null;
-                            }
-                            else
+                            Current.OrderBy(el => el.WorkEndTime);
+                            Done.Add(Current[Current.Count-1]);
+                            Current.RemoveAt(Current.Count - 1);
+                            if (Queue.Count != 0)
                             {
                                 if (radioButton1.Checked)
                                 {
-                                    Current = Queue[0];
+                                    Current.Add(Queue[0]);
                                     Queue.RemoveAt(0);
                                 }
                                 else
                                 {
-                                    Current = Queue[Queue.Count - 1];
+                                    Current.Add(Queue[Queue.Count - 1]);
                                     Queue.RemoveAt(Queue.Count - 1);
                                 }
                                 tau2 = Generator.NextRand(Param2);
-                                Current.WorkStartTime = CurrentT;
-                                Current.WorkEndTime = CurrentT + tau2;
+                                Current[Current.Count - 1].WorkStartTime = CurrentT;
+                                Current[Current.Count - 1].WorkEndTime = CurrentT + tau2;
                             }
                             CurrentState--;
                         }
@@ -1010,9 +1013,9 @@ namespace lab4
                             TempSum1 = ((TempSum1 * (Iterations - 1)) + ((CurrentState > 1) ? (CurrentState - 1) : (0))) / Iterations;
                             TempSum2 += (CurrentState > 0) ? (CurrentState) : (0);
                             chart4.Series[0].Points.AddXY(CurrentT, ((CurrentState > 1) ? (CurrentState - 1) : (0)));
-                            chart4.Series[1].Points.AddXY(CurrentT, TempSum1);
+                            //chart4.Series[1].Points.AddXY(CurrentT, TempSum1);
                             AllIncome++;
-                            if (CurrentState == QueueLength + 1)
+                            if (CurrentState == QueueLength + NumberOfChannels)
                             {
                                 NumberOfDenies++;
                                 tau1 = Generator.NextRand(Param1);
@@ -1025,15 +1028,31 @@ namespace lab4
                                 New = new Need(CurrentT + tau1);
                                 CurrentState++;
                             }
+                            if (Current.Count< NumberOfChannels)
+                            {
+                                if (radioButton1.Checked)
+                                {
+                                    Current.Add(Queue[0]);
+                                    Queue.RemoveAt(0);
+                                }
+                                else
+                                {
+                                    Current.Add(Queue[Queue.Count - 1]);
+                                    Queue.RemoveAt(Queue.Count - 1);
+                                }
+                                tau2 = Generator.NextRand(Param2);
+                                Current[Current.Count - 1].WorkStartTime = CurrentT;
+                                Current[Current.Count - 1].WorkEndTime = CurrentT + tau2;
+                            }
                         }
                     }
-                    if (Current!=null && New!=null &&New.IncomeTime == Current.WorkEndTime)
+                    if (Current.Count!=0 && New!=null &&New.IncomeTime == Current.Min(el => el.WorkEndTime))
                     {
                         New.IncomeTime += 0.00001;
                     }
-                    if (Current != null)
+                    if (Current.Count != 0)
                     {
-                        tau1 = (New.IncomeTime < Current.WorkEndTime) ? (New.IncomeTime - CurrentT) : (Current.WorkEndTime - CurrentT);
+                        tau1 = (New.IncomeTime < Current.Min(el => el.WorkEndTime)) ? (New.IncomeTime - CurrentT) : (Current.Min(el => el.WorkEndTime) - CurrentT);
                     }
                     else
                     {
@@ -1052,7 +1071,7 @@ namespace lab4
                     chart2.Series[0].Points.AddXY(CurrentT, Done.Count);
                     chart2.Series[1].Points.AddXY(CurrentT, NumberOfDenies);
                     chart2.Series[2].Points.AddXY(CurrentT, AllIncome);
-                    chart3.Series[0].Points.AddXY(CurrentT, AverageWork);
+                    //chart3.Series[0].Points.AddXY(CurrentT, AverageWork);
                     chart3.Series[1].Points.AddXY(CurrentT, AverageWait);
                     /////////////////////////////////
                 }
@@ -1071,16 +1090,18 @@ namespace lab4
                      ?(Math.Pow(NumberOfChannels,i-NumberOfChannels))
                      :(1)));
             }
-            p0 = 1 / p0;
+            p0 = 1d / p0;
             dataGridView2.Rows.Add("0", Math.Round(p0,Accuracy), Math.Round(TimeInNode[0]/TimeOfWork, Accuracy));
-            for (i = 1; i < QueueLength + 1 + NumberOfChannels; i++)
+            double temp1, temp2;
+            for (i  = 1; i < QueueLength + 1 + NumberOfChannels; i++)
             {
-                dataGridView2.Rows.Add("0", Math.Round(p0*Math.Pow(ro,i) / ((((i > QueueLength)
-                     ? (Factorial(QueueLength))
-                     : (Factorial(i)))
-                    * ((i > QueueLength)
-                     ? (Math.Pow(QueueLength, i - QueueLength))
-                     : (1)))), Accuracy), Math.Round(TimeInNode[i] / TimeOfWork, Accuracy));
+                temp1 = ((i > NumberOfChannels)  
+                     ? (Factorial(NumberOfChannels))
+                     : (Factorial(i)));
+                temp2 = (i > NumberOfChannels)
+                     ? (Math.Pow(NumberOfChannels, i - NumberOfChannels))
+                     : (1);
+                dataGridView2.Rows.Add("0", Math.Round(p0*Math.Pow(ro,i) / (temp1 * temp2), Accuracy), Math.Round(TimeInNode[i] / TimeOfWork, Accuracy));
             }
             dataGridView1.Rows[0].Cells[1].Value = "" + Math.Round(p0 * Math.Pow(ro, QueueLength + NumberOfChannels)/(Factorial(NumberOfChannels)*Math.Pow(NumberOfChannels,QueueLength)), Accuracy);
             dataGridView1.Rows[0].Cells[2].Value = "" + Math.Round(TimeInNode[QueueLength +  NumberOfChannels] / TimeOfWork, Accuracy);
@@ -1115,7 +1136,7 @@ namespace lab4
                 temp += (i) * (TimeInNode[i] / TimeOfWork);
             }
 
-            dataGridView1.Rows[5].Cells[1].Value = Math.Round((ro * ro * (1 - Math.Pow(ro, QueueLength) * (QueueLength + 1 - QueueLength * ro))) / ((1 - Math.Pow(ro, QueueLength + 2)) * (1 - ro)), Accuracy) + Math.Round(ro * (1 - p0 * (Math.Pow(ro, QueueLength + 1)) / (1)), Accuracy);
+            dataGridView1.Rows[5].Cells[1].Value = Math.Round(p0 * (Math.Pow(ro, NumberOfChannels + 1) / (NumberOfChannels * Factorial(NumberOfChannels))) * ((1 - (QueueLength + 1) * Math.Pow(ro / NumberOfChannels, QueueLength) + QueueLength * Math.Pow(ro / NumberOfChannels, QueueLength + 1)) / (Math.Pow(1 - ro / NumberOfChannels, 2))) + ro * (1 - Math.Round(p0 * Math.Pow(ro, QueueLength + NumberOfChannels) / (Factorial(NumberOfChannels) * Math.Pow(NumberOfChannels, QueueLength)), Accuracy)), Accuracy);
             dataGridView1.Rows[5].Cells[2].Value = Math.Round((double)TempSum2 / Iterations, Accuracy);
             dataGridView1.Rows[5].Cells[3].Value = Math.Round(temp, Accuracy);
 
@@ -1123,19 +1144,24 @@ namespace lab4
             temp = Done.Select(el => el.WorkStartTime - el.IncomeTime).Average();
             temp = ((1 - (QueueLength + 1) * Math.Pow(ro, QueueLength) + QueueLength * Math.Pow(ro, QueueLength+1)) / Math.Pow(1-ro,2));
 
-            dataGridView1.Rows[6].Cells[1].Value = Math.Round(((ro * ro * (1 - Math.Pow(ro, QueueLength) * (QueueLength + 1 - QueueLength * ro))) / ((1 - Math.Pow(ro, QueueLength + 2)) * (1 - ro)))/lambda, Accuracy);
+            AverageWait = Done.Select(el => el.WorkStartTime - el.IncomeTime).Average();
+            AverageWork = Done.Select(el => el.WorkEndTime - el.WorkStartTime).Average();
+
+            dataGridView1.Rows[6].Cells[1].Value = Math.Round((p0 * (Math.Pow(ro, NumberOfChannels + 1) / (NumberOfChannels * Factorial(NumberOfChannels))) * ((1 - (QueueLength + 1) * Math.Pow(ro / NumberOfChannels, QueueLength) + QueueLength * Math.Pow(ro / NumberOfChannels, QueueLength + 1)) / (Math.Pow(1 - ro / NumberOfChannels, 2)))) /lambda, Accuracy);
             //Rows[6].Cells[2].Value = Math.Round(((ro*p0)/(mi))*temp, Accuracy);
-            //dataGridView1.Rows[6].Cells[3].Value = Math.Round(AverageWait, Accuracy);
+            dataGridView1.Rows[6].Cells[3].Value = Math.Round(AverageWait, Accuracy);
+
+
 
             temp = Done.Select(el => el.WorkEndTime - el.WorkStartTime).Average();
 
             dataGridView1.Rows[7].Cells[1].Value = Math.Round(1d/mi, Accuracy);
             dataGridView1.Rows[7].Cells[2].Value = Math.Round(temp, Accuracy);
-            //dataGridView1.Rows[7].Cells[3].Value = Math.Round(AverageWork, Accuracy);
+            dataGridView1.Rows[7].Cells[3].Value = Math.Round(AverageWork, Accuracy);
 
-            dataGridView1.Rows[8].Cells[1].Value = Math.Round(Math.Round(((ro * ro * (1 - Math.Pow(ro, QueueLength) * (QueueLength + 1 - QueueLength * ro))) / ((1 - Math.Pow(ro, QueueLength + 2)) * (1 - ro))) / lambda, Accuracy) + (1 - Math.Round(p0 * Math.Pow(ro, QueueLength + 1), Accuracy)) /mi, Accuracy);
-            //dataGridView1.Rows[8].Cells[2].Value = Math.Round(1d / (mi*(1-ro)), Accuracy);
-            //dataGridView1.Rows[8].Cells[3].Value = Math.Round(AverageWait+AverageWork, Accuracy);
+            dataGridView1.Rows[8].Cells[1].Value = Math.Round(1d / mi + (p0 * (Math.Pow(ro, NumberOfChannels + 1) / (NumberOfChannels * Factorial(NumberOfChannels))) * ((1 - (QueueLength + 1) * Math.Pow(ro / NumberOfChannels, QueueLength) + QueueLength * Math.Pow(ro / NumberOfChannels, QueueLength + 1)) / (Math.Pow(1 - ro / NumberOfChannels, 2)))) / lambda, Accuracy);
+            dataGridView1.Rows[8].Cells[2].Value = Math.Round(1d / (mi*(1-ro)), Accuracy);
+            dataGridView1.Rows[8].Cells[3].Value = Math.Round(AverageWait+AverageWork, Accuracy);
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
