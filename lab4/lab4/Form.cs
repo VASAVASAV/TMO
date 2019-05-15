@@ -875,7 +875,7 @@ namespace lab4
                         {
                             Iterations++;
                             TempSum1 = ((TempSum1 * (Iterations - 1)) + ((CurrentState > NumberOfChannels) ? (CurrentState - NumberOfChannels) : (0))) / Iterations;
-                            TempSum2 += CurrentState;
+                            TempSum2 += (CurrentState > 0) ? (CurrentState) : (0);
                             chart4.Series[0].Points.AddXY(CurrentT, ((CurrentState > 1) ? (CurrentState - 1) : (0)));
                             chart4.Series[1].Points.AddXY(CurrentT, TempSum1);
                             AllIncome++;
@@ -888,8 +888,8 @@ namespace lab4
                             {
                                 if (CurrentState == 0)
                                 {
-                                    Current.Add(new Need(CurrentT + tau1));
-                                    Current[Current.Count-1].WorkStartTime = Current.IncomeTime;
+                                    Current = new Need(CurrentT + tau1);
+                                    Current.WorkStartTime = Current.IncomeTime;
                                 }
                                 else
                                 {
