@@ -31,5 +31,44 @@ namespace lab2
                 s += b[i];
             }
         }
+
+        public static int CompNumOfClasses(int Number)
+        {
+            int FinalNumber = 0;
+            if (Number > 100)
+            {
+                FinalNumber = (int)Math.Ceiling(Math.Pow(Number, 1.0 / 3));
+            }
+            else
+            {
+                FinalNumber = (int)Math.Pow(Number, 1.0 / 2);
+            }
+            if ((FinalNumber % 2) == 0)
+            {
+                return FinalNumber + 1;
+            }
+            else
+            {
+                return FinalNumber;
+            }
+        }
+
+        public static int ComputeSizeOfPoint(int Number)
+        {
+            if (Number < 13)
+            {
+                if (Number < 4)
+                    return 5;
+                if (Number > 8)
+                    return 3;
+                return 4;
+            }
+            else
+            {
+                if (Number > 25)
+                    return 1;
+                return 2;
+            }
+        }
     }
 }

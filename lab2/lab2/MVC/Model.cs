@@ -9,7 +9,7 @@ namespace lab2
     class Model
     {
         public static Controller MyCont;
-        List<double> Data = new List<double>();
+        List<double> Data = new List<double>();//lets pretend they arent stored here
 
         public void SetData(List<double> Input)
         {
@@ -19,6 +19,26 @@ namespace lab2
                 Data.Add(Input[i]);
             }
             Data.Sort();
+        }
+
+        public List<double> GetData()
+        {
+            List<double> result = new List<double>();
+            for(int i=0; i < Data.Count;i++)
+            {
+                result.Add(Data[i]);
+            }
+            return result;
+        }
+
+        public bool CheckIntervals()
+        {
+            return true;
+        }
+
+        public void DeleteVal(double ValueToDelete)
+        {
+            Data.RemoveAll(x=> x==ValueToDelete);
         }
     }
 }

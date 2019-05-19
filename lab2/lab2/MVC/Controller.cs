@@ -62,7 +62,20 @@ namespace lab2
                 }
                 MyModel.SetData(intervals);
             }
+            RefreshView();
         }
 
+        public void RefreshView()
+        {
+            List<double> Data = MyModel.GetData();
+            View.PaintDistFuncs(Data);
+            View.DrawTable(Data);
+        }
+
+        public void RemoveVal(double Value)
+        {
+            MyModel.DeleteVal(Value);
+            RefreshView();
+        }
     }
 }
