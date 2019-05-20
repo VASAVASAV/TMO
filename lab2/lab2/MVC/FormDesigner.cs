@@ -298,10 +298,5 @@ namespace lab2
             this.PerformLayout();
 
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
