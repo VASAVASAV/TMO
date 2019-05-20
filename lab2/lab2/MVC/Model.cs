@@ -21,6 +21,13 @@ namespace lab2
             Data.Sort();
         }
 
+        public bool CheckDataDist()
+        {
+            if (Data == null || Data.Count == 0)
+                return false;
+            return true; 
+        }
+
         public List<double> GetData()
         {
             List<double> result = new List<double>();

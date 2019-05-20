@@ -65,6 +65,11 @@ namespace lab2
             RefreshView();
         }
 
+        public bool CheckData()
+        {
+            return MyModel.CheckDataDist();
+        }
+
         public void RefreshView()
         {
             List<double> Data = MyModel.GetData();

@@ -24,6 +24,9 @@ namespace lab2
         private DataGridViewTextBoxColumn Column2;
         private TextBox textBox2;
         private Label label1;
+        private Button button1;
+        private RadioButton radioButton1;
+        private RadioButton radioButton2;
         private ToolStripMenuItem вийтиToolStripMenuItem;
 
         private void InitializeComponent()
@@ -54,6 +57,9 @@ namespace lab2
             this.chart3 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -160,9 +166,9 @@ namespace lab2
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.textBox1);
-            this.groupBox2.Location = new System.Drawing.Point(736, 121);
+            this.groupBox2.Location = new System.Drawing.Point(736, 146);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(302, 284);
+            this.groupBox2.Size = new System.Drawing.Size(302, 259);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Tag = "";
@@ -173,7 +179,7 @@ namespace lab2
             this.textBox1.Location = new System.Drawing.Point(7, 19);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(288, 257);
+            this.textBox1.Size = new System.Drawing.Size(288, 236);
             this.textBox1.TabIndex = 0;
             // 
             // chart2
@@ -231,9 +237,44 @@ namespace lab2
             this.label1.TabIndex = 7;
             this.label1.Text = "Ймовірність";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(735, 61);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(175, 49);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Перевірити на збіг з експоненціальним законом розподілу за критерієм:";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(735, 117);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(65, 17);
+            this.radioButton1.TabIndex = 9;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Пірсона";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(806, 117);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(93, 17);
+            this.radioButton2.TabIndex = 10;
+            this.radioButton2.Text = "Колмогорова";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.ClientSize = new System.Drawing.Size(1062, 687);
+            this.Controls.Add(this.radioButton2);
+            this.Controls.Add(this.radioButton1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.chart3);
@@ -255,6 +296,11 @@ namespace lab2
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
 
         }
     }
