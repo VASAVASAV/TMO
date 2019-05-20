@@ -28,16 +28,17 @@ namespace lab2
             return true; 
         }
 
-        public Tuple<double, double> CheckDataDist(bool Type, double alfa)
+        public double CheckDataDist(bool TypeOfCheck, double alfa)
         {
-            if (Type)//pirson
+            if (TypeOfCheck)//Pirson
             {
 
             }
-            else//kolmogorov
+            else//Kolmogorov
             {
 
             }
+            return 0;
         }
 
         public List<double> GetData()

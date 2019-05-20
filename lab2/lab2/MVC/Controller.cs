@@ -65,10 +65,14 @@ namespace lab2
             RefreshView();
         }
 
-        public bool CheckData(bool Type, double alfa)
+        public void CheckData(bool Type, double alfa)
         {
-            if(MyModel.CheckDataDist())
-            return MyModel.CheckDataDist();
+            if (!MyModel.CheckData())
+            {
+                View.ShowMessage("Nothing to do");
+                return;
+            }
+            MyModel.CheckDataDist(Type, alfa);
         }
 
         public void RefreshView()
