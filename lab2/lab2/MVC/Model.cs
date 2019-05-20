@@ -21,11 +21,23 @@ namespace lab2
             Data.Sort();
         }
 
-        public bool CheckDataDist()
+        public bool CheckData()
         {
             if (Data == null || Data.Count == 0)
                 return false;
             return true; 
+        }
+
+        public Tuple<double, double> CheckDataDist(bool Type, double alfa)
+        {
+            if (Type)//pirson
+            {
+
+            }
+            else//kolmogorov
+            {
+
+            }
         }
 
         public List<double> GetData()

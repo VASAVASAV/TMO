@@ -75,6 +75,24 @@ namespace lab2
         }
 
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            double alfa;
+            try
+            {
+                alfa = Convert.ToDouble(textBox2.Text);
+                if (alfa <= 0 || alfa >= 1)
+                {
+                    throw new Exception();
+                }
+            }
+            catch
+            {
+                alfa = 0.05;
+                textBox2.Text = "0,05";
+            }
+            MyCont.CheckData(radioButton1.Checked, alfa);
+        }
 
         private void dataGridView1_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
         {
