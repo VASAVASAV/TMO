@@ -12,7 +12,7 @@ namespace lab2
     {
         public static Controller MyCont;
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             double alfa = 0.05;
             try
@@ -88,26 +88,6 @@ namespace lab2
             {
                 dataGridView1.Rows.Add(Math.Round(Data[i],5),Data[i]);
             }
-        }
-
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            double alfa;
-            try
-            {
-                alfa = Convert.ToDouble(textBox2.Text);
-                if (alfa <= 0 || alfa >= 1)
-                {
-                    throw new Exception();
-                }
-            }
-            catch
-            {
-                alfa = 0.05;
-                textBox2.Text = "0,05";
-            }
-            MyCont.CheckData(radioButton1.Checked, alfa);
         }
 
         private void dataGridView1_UserDeletedRow(object sender, DataGridViewRowEventArgs e)

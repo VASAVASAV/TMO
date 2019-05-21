@@ -72,7 +72,25 @@ namespace lab2
                 View.ShowMessage("Nothing to do");
                 return;
             }
-            MyModel.CheckDataDist(Type, alfa);
+            int NumbOfClasses = ToolsForWork.CompNumOfClasses(MyModel.GetData().Count);
+            double result =  MyModel.CheckDataDist(Type, alfa);
+            double quan = Quantile.HirsQuan(1 - alfa, NumbOfClasses - 1);
+            View.ShowMessage("Статистика критерію - " + Math.Round(result, 5) + ", критичне значення критерію - " + Math.Round(quan, 5));//+ "--------------------------------------------------------------------------" + Environment.NewLine;
+            View.ShowMessage("Статистика критерію - " + Math.Round(result, 5) + ", критичне значення критерію - " + Math.Round(quan, 5)); // + "--------------------------------------------------------------------------" + Environment.NewLine;
+            if (result <= quan)
+            {
+                View.ShowMessage("За критерієм згоди χ^2 Пірсона гіпотеза про збіг емпіричної функції розподілу з теоретичноую з критичним рівнем значущості " + Math.Round(alfa, 5) + " є вірною " + Environment.NewLine + "--------------------------------------------------------------------------") ;
+                {
+                    View.ShowMessage("За критерієм згоди χ^2 Пірсона гіпотеза про збіг емпіричної функції розподілу з теоретичноую з критичним рівнем значущості " + Math.Round(alfa, 5) + " є вірною " + Environment.NewLine + "--------------------------------------------------------------------------");
+                }
+            }
+            else
+            {
+                View.ShowMessage("За критерієм згоди χ^2 Пірсона гіпотеза про збіг емпіричної функції розподілу з теоретичноую з критичним рівнем значущості " + Math.Round(alfa, 5) + " є невірною " + Environment.NewLine + "--------------------------------------------------------------------------");
+                {
+                    View.ShowMessage("За критерієм згоди χ^2 Пірсона гіпотеза про збіг емпіричної функції розподілу з теоретичноую з критичним рівнем значущості " + Math.Round(alfa, 5) + " є невірною " + Environment.NewLine + "--------------------------------------------------------------------------" );
+                }
+            }
         }
 
         public void RefreshView()
