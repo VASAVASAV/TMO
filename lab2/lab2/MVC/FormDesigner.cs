@@ -22,11 +22,13 @@ namespace lab2
         private System.Windows.Forms.DataVisualization.Charting.Chart chart3;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
-        private TextBox textBox2;
         private Label label1;
         private Button button1;
         private RadioButton radioButton1;
         private RadioButton radioButton2;
+        private ToolStripMenuItem визначитиІнтенсивністьToolStripMenuItem;
+        private ToolStripMenuItem сталуToolStripMenuItem;
+        private ToolStripMenuItem кусковоЛінійнуToolStripMenuItem;
         private ToolStripMenuItem вийтиToolStripMenuItem;
 
         private void InitializeComponent()
@@ -40,13 +42,15 @@ namespace lab2
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.відкритичасовийРядToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.відкритирозподілΤToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.вийтиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.визначитиІнтенсивністьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сталуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.кусковоЛінійнуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,7 +59,6 @@ namespace lab2
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart3 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
@@ -88,7 +91,8 @@ namespace lab2
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.файлToolStripMenuItem});
+            this.файлToolStripMenuItem,
+            this.визначитиІнтенсивністьToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1062, 24);
@@ -125,6 +129,29 @@ namespace lab2
             this.вийтиToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.вийтиToolStripMenuItem.Text = "Вийти";
             this.вийтиToolStripMenuItem.Click += new System.EventHandler(this.ВийтиToolStripMenuItem_Click);
+            // 
+            // визначитиІнтенсивністьToolStripMenuItem
+            // 
+            this.визначитиІнтенсивністьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.сталуToolStripMenuItem,
+            this.кусковоЛінійнуToolStripMenuItem});
+            this.визначитиІнтенсивністьToolStripMenuItem.Name = "визначитиІнтенсивністьToolStripMenuItem";
+            this.визначитиІнтенсивністьToolStripMenuItem.Size = new System.Drawing.Size(154, 20);
+            this.визначитиІнтенсивністьToolStripMenuItem.Text = "Визначити інтенсивність";
+            // 
+            // сталуToolStripMenuItem
+            // 
+            this.сталуToolStripMenuItem.Name = "сталуToolStripMenuItem";
+            this.сталуToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сталуToolStripMenuItem.Text = "Сталу";
+            this.сталуToolStripMenuItem.Click += new System.EventHandler(this.сталуToolStripMenuItem_Click);
+            // 
+            // кусковоЛінійнуToolStripMenuItem
+            // 
+            this.кусковоЛінійнуToolStripMenuItem.Name = "кусковоЛінійнуToolStripMenuItem";
+            this.кусковоЛінійнуToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.кусковоЛінійнуToolStripMenuItem.Text = "Кусково лінійну";
+            this.кусковоЛінійнуToolStripMenuItem.Click += new System.EventHandler(this.кусковоЛінійнуToolStripMenuItem_Click);
             // 
             // groupBox1
             // 
@@ -213,29 +240,18 @@ namespace lab2
             this.chart3.Legends.Add(legend3);
             this.chart3.Location = new System.Drawing.Point(11, 459);
             this.chart3.Name = "chart3";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chart3.Series.Add(series4);
             this.chart3.Size = new System.Drawing.Size(718, 210);
             this.chart3.TabIndex = 5;
             this.chart3.Text = "chart3";
             // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(736, 34);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 6;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(842, 37);
+            this.label1.Location = new System.Drawing.Point(736, 36);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 13);
+            this.label1.Size = new System.Drawing.Size(47, 13);
             this.label1.TabIndex = 7;
-            this.label1.Text = "Ймовірність";
+            this.label1.Text = "α = 0.05";
             // 
             // button1
             // 
@@ -276,7 +292,6 @@ namespace lab2
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.chart3);
             this.Controls.Add(this.chart2);
             this.Controls.Add(this.groupBox2);

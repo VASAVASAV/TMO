@@ -12,20 +12,28 @@ namespace lab2
     {
         public static Controller MyCont;
 
+
+        private void сталуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<double> temp = MyCont.GetDataFromModel();
+            temp.Sort();
+            double Lambda = 0;
+            Lambda = 1 / temp.Average();
+            chart3.Series.Clear();
+            System.Windows.Forms.DataVisualization.Charting.Series TempSer = new System.Windows.Forms.DataVisualization.Charting.Series();
+            TempSer.BorderWidth = 5;
+            TempSer.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            TempSer.Name = "Ser";
+            TempSer.Points.AddXY(temp[0],Lambda);
+            TempSer.Points.AddXY(temp[temp.Count-1], Lambda);
+            chart3.ChartAreas[0].AxisX.Minimum = temp[0];
+            chart3.ChartAreas[0].AxisX.Maximum = temp[temp.Count-1];
+            chart3.Series.Add(TempSer);
+        }
+
         private void Button1_Click(object sender, EventArgs e)
         {
             double alfa = 0.05;
-            try
-            {
-                alfa = Convert.ToDouble(textBox2.Text);
-                if (alfa <= 0 || alfa >= 1)
-                    throw new Exception();
-            }
-            catch
-            {
-                textBox2.Text = "0,05";
-                alfa = 0.05;
-            }
             MyCont.CheckData(radioButton1.Checked,alfa);
         }
 
@@ -39,6 +47,24 @@ namespace lab2
             Close();
         }
 
+
+        private void кусковоЛінійнуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<double> temp = MyCont.GetDataFromModel();
+            temp.Sort();
+            double Lambda = 0;
+            Lambda = 1 / temp.Average();
+            chart3.Series.Clear();
+            int Num = ToolsForWork.CompNumOfClasses(temp.Count);
+            int[] Intenc = new int[Num];
+            int Nj = 0;
+            int Ni;
+            for(int i = 0; i < Num; i++)
+            {
+                Ni = 0;
+                var lol = temp.FindAll(x=> )
+            }
+        }
 
         private void ВідкритичасовийРядToolStripMenuItem_Click(object sender, EventArgs e)
         {
