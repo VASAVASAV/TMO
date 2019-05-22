@@ -11,7 +11,78 @@ namespace lab2
     partial class MainForm
     {
         public static Controller MyCont;
+        private int Connects = 0;
 
+        private void обєднатиКусковоЛінійнуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Connects++;
+            List<double> temp = MyCont.GetDataFromModel();
+            temp.Sort();
+            int Num = ToolsForWork.CompNumOfClasses(temp.Count);
+            double Lambda = 0;
+            double min = temp[0] - 0.000001;
+            double max = temp[temp.Count - 1] + 0.000001;
+            double step = (max - min) / Num;
+            Lambda = 1 / temp.Average();
+            chart3.Series.Clear();
+            List<double> Intenc = new List<double>();
+            List<int> counts = new List<int>();
+            List<Tuple<double, double>> Borders = new List<Tuple<double, double>>();
+            int Nj = 0;
+            int Ni;
+            for (int i = 0; i < Num; i++)
+            {
+                Ni = 0;
+                var lol = temp.FindAll(x => (x >= min + step * i) && (x < min + step * (i + 1)));
+                Ni = lol.Count;
+
+                counts.Add(Ni);
+                Intenc.Add((double)Ni / ((temp.Count - Nj) * step));
+                Borders.Add(new Tuple<double, double>(min + step * i, min + step * (i + 1)));
+
+                Nj += Ni;
+            }
+
+            double quan, stat;
+
+            for (int i = 0; i < Connects; i++)
+            {
+                for (int j = 0; j < counts.Count - 1; j++)
+                {
+                    stat = ((double)(Intenc[j + 1] - Intenc[j]) / (Math.Sqrt((counts[j] - 1) * Intenc[j + 1] * Intenc[j + 1] + (counts[j + 1] - 1) * Intenc[j] * Intenc[j]))) * Math.Sqrt((double)(counts[j + 1] * counts[j] * (counts[j + 1] + counts[j] - 2)) / (counts[j + 1] + counts[j]));
+                    quan = Quantile.StudQuan(0.025, counts[j + 1] + counts[j] - 2);
+                    if (Math.Abs(stat) < quan)
+                    {
+                        Nj = 0;
+                        for (int k = 0; k <= j; k++)
+                        {
+                            Nj += counts[k];
+                        }
+                        Intenc[j] = Intenc[j] * ((Borders[j].Item2 - Borders[j].Item1) / (Borders[j + 1].Item2 - Borders[j].Item1)) + Intenc[j+1] * ((Borders[j+1].Item2 - Borders[j+1].Item1) / (Borders[j + 1].Item2 - Borders[j].Item1));
+                        Intenc.RemoveAt(j + 1);
+                        counts[j] += counts[j + 1];
+                        counts.RemoveAt(j + 1);
+                        Borders[j] = new Tuple<double, double>(Borders[j].Item1, Borders[j + 1].Item2);
+                        Borders.RemoveAt(j + 1);
+                        break;
+                    }
+
+                }
+            }
+
+            for (int i = 0; i < counts.Count; i++)
+            {
+                System.Windows.Forms.DataVisualization.Charting.Series TempSer = new System.Windows.Forms.DataVisualization.Charting.Series();
+                TempSer.BorderWidth = 5;
+                TempSer.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+                TempSer.Name = "Ser" + i;
+                TempSer.Points.AddXY(Borders[i].Item1, Intenc[i]);
+                TempSer.Points.AddXY(Borders[i].Item2, Intenc[i]);
+                chart3.Series.Add(TempSer);
+            }
+            chart3.ChartAreas[0].AxisX.Minimum = temp[0];
+            chart3.ChartAreas[0].AxisX.Maximum = temp[temp.Count - 1];
+        }
 
         private void сталуToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -50,20 +121,73 @@ namespace lab2
 
         private void кусковоЛінійнуToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Connects = 0;
             List<double> temp = MyCont.GetDataFromModel();
             temp.Sort();
+            int Num = ToolsForWork.CompNumOfClasses(temp.Count);
             double Lambda = 0;
+            double min = temp[0]-0.000001;
+            double max = temp[temp.Count - 1] + 0.000001;
+            double step = (max - min) / Num;
             Lambda = 1 / temp.Average();
             chart3.Series.Clear();
-            int Num = ToolsForWork.CompNumOfClasses(temp.Count);
-            int[] Intenc = new int[Num];
+            List<double> Intenc = new List<double>();
+            List<int> counts = new List<int>();
+            List<Tuple<double, double>> Borders = new List<Tuple<double, double>>();
             int Nj = 0;
             int Ni;
             for(int i = 0; i < Num; i++)
             {
                 Ni = 0;
-                var lol = temp.FindAll(x=> )
+                var lol = temp.FindAll(x => (x >= min + step * i) && (x < min + step * (i + 1)));
+                Ni = lol.Count;
+
+                counts.Add(Ni);
+                Intenc.Add((double)Ni / ((temp.Count - Nj) * step));
+                Borders.Add(new Tuple<double, double> (min + step * i, min + step * (i + 1)));
+
+                Nj += Ni;
             }
+
+            double quan, stat;
+
+            for (int i = 0; i < Connects; i++)
+            {
+                for (int j = 0; j < counts.Count - 1; j++)
+                {
+                    stat = ((Intenc[j + 1] - Intenc[j]) / (Math.Sqrt((counts[j] - 1) * Intenc[j + 1] * Intenc[j + 1] + (counts[j + 1] - 1) * Intenc[j] * Intenc[j]))) * Math.Sqrt((counts[j + 1]* counts[j]*(counts[j + 1] + counts[j] -2)) /(counts[j + 1] + counts[j]));
+                    quan = Quantile.StudQuan(1-0.025, counts[j + 1] + counts[j]-2);
+                    if (stat < quan)
+                    {
+                        Nj = 0;
+                        for (int k = 0; k <=j; k++)
+                        {
+                            Nj += counts[k];
+                        }
+                        Intenc[j] = (counts[j] + counts[j + 1]) / ((temp.Count-Nj)*(Borders[j+1].Item2-Borders[j].Item1));
+                        Intenc.RemoveAt(j + 1);
+                        counts[j] += counts[j + 1];
+                        counts.RemoveAt(j+1);
+                        Borders[j] = new Tuple<double, double>(Borders[j].Item1, Borders[j+1].Item2);
+                        Borders.RemoveAt(j + 1);
+                        break;
+                    }
+                    
+                }
+            }
+
+            for (int i = 0; i < counts.Count; i++)
+            {
+                System.Windows.Forms.DataVisualization.Charting.Series TempSer = new System.Windows.Forms.DataVisualization.Charting.Series();
+                TempSer.BorderWidth = 5;
+                TempSer.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+                TempSer.Name = "Ser" + i;
+                TempSer.Points.AddXY(Borders[i].Item1, Intenc[i]);
+                TempSer.Points.AddXY(Borders[i].Item2, Intenc[i]);
+                chart3.Series.Add(TempSer);
+            }
+            chart3.ChartAreas[0].AxisX.Minimum = temp[0];
+            chart3.ChartAreas[0].AxisX.Maximum = temp[temp.Count - 1];
         }
 
         private void ВідкритичасовийРядToolStripMenuItem_Click(object sender, EventArgs e)
@@ -78,6 +202,8 @@ namespace lab2
 
             if (OpeningDialog.ShowDialog() == DialogResult.OK)
             {
+                chart3.Series.Clear();
+                Connects = 0;
                 MyCont.ReadFile(OpeningDialog, true);
             }
         }
@@ -94,6 +220,8 @@ namespace lab2
 
             if (OpeningDialog.ShowDialog() == DialogResult.OK)
             {
+                chart3.Series.Clear();
+                Connects = 0;
                 MyCont.ReadFile(OpeningDialog,false);
             }
             //this.ProgressBar.Value = 1;
@@ -118,7 +246,9 @@ namespace lab2
 
         private void dataGridView1_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
         {
-             MyCont.RemoveVal(Convert.ToDouble(e.Row.Cells[1].Value));
+            Connects = 0;
+            chart3.Series.Clear();
+            MyCont.RemoveVal(Convert.ToDouble(e.Row.Cells[1].Value));
         }
 
 
